@@ -1,7 +1,7 @@
 """Merge pdf files.
 
 Dependencies:
-pypdf2
+pip install pypdf2
 """
 
 
@@ -10,6 +10,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 import os
 import datetime
 from dateutil import parser
+import sys
 
 def merger(output_path, input_paths):
     pdf_writer = PdfFileWriter()
@@ -30,9 +31,18 @@ def merger(output_path, input_paths):
 
 
 if __name__ == '__main__':
-    paths = glob.glob('*.pdf')
+
+    if len(sys.argv) < 3:
+        raise Exception("Provide two positional args: input dir  and output file name")
+
+    src = sys.argv[1]
+    dst = sys.argv[2]
+    print(src, dst)
+
+    paths = glob.glob(src + '/*.pdf')
     paths.sort(reverse=True)
 
-    print(f'file count: {len(paths)}')
+    print(f'all files: {len(paths)}')
     print(paths)
-    merger('merged.pdf', paths)
+
+    merger(dst, paths)
