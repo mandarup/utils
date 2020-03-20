@@ -271,3 +271,16 @@ def align_columns(X, training_features):
 
     return X
 
+
+
+def print_time(start, process_name='', return_time=True):
+    """Print and return time.
+    Args:
+        start (time.time)
+        process_name (str)
+        return_time (bool) : if true, return current time.
+    """
+    from datetime import datettime
+    # print(f'{process_name} took {round((time.time() - start)/60, 1)} min')
+    print(f'{process_name} took { str(datetime.timedelta(seconds=time.time()-start))} ')
+    return time.time()
